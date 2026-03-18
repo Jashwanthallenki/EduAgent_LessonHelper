@@ -1,15 +1,15 @@
-// api.js
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
-export const sendChatMessage = async (data) => {
-  const res = await fetch(`${API_URL}/chat`, {
+export async function sendChatMessage(payload) {
+  const res = await fetch("/api/chat", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
   });
 
-  if (!res.ok) throw new Error("Failed to send message");
+  if (!res.ok) {
+    throw new Error(`API error: ${res.status}`);
+  }
 
-  return res.json();
-};
+  return await res.json();
+}
