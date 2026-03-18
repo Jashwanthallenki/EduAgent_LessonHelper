@@ -3,7 +3,7 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const sendChatMessage = async (data) => {
-  const res = await fetch(`${API_URL}/chat`, {
+  const res = await fetch(`${API_URL}/api/chat`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
