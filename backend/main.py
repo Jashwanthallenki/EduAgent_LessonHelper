@@ -7,9 +7,13 @@ from llm import answer_question
 
 app = FastAPI(title="EduAgent Backend", version="1.0.0")
 
+origins = [
+    "https://eduagent-two.vercel.app/"
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,   # must be specific if allow_credentials=True
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
