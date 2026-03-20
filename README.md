@@ -1,74 +1,187 @@
-# EduAgent Lesson Helper (Intern Task)
+# EduAgent Lesson Helper
 
-A small full‑stack demo where a student reads a lesson and gets **ASAP clarifications** from **EduAgent** by highlighting text or asking directly.
+EduAgent Lesson Helper is a full-stack learning assistant that enables students to get **instant, context-aware clarifications** while reading study material. By highlighting text or asking questions, students receive structured, adaptive explanations grounded strictly in the lesson content.
 
-## MVP (from the original task brief)
+---
 
-- **Lesson content rendered on screen**: a real readable lesson (hardcoded sample topic initially).
-- **Highlight → instant help**: highlight lesson text → popover shows **Ask EduAgent**.
-- **Context-aware chat**: student can ask multiple doubts; **chat history** is sent so follow‑ups stay in context.
-- **Fallback context**: if the student asks without highlighting, the **entire current lesson** is used as context (no generic answers).
+## 🚀 Features
 
-## Enhancements added (requested during build)
+### 📖 Interactive Lesson Reading
+- Displays structured lesson content (sample or user-provided)
+- Enables real-time interaction while reading
 
-- **Groq LLM integration**: backend calls Groq Chat Completions (via `GROQ_API_KEY`).
-- **`.env` support**: local keys via `backend/.env` (`python-dotenv`) + `backend/.env.example`.
-- **Structured student-level answers**: responses follow a fixed template (Summary / Key idea / Step by step / In one line).
-- **Answer grounding rules**: EduAgent is instructed to answer **only from the provided lesson/highlight context** and say when info is not present.
-- **Adaptive personalization** (no user-level question):
-  - Infers **Beginner / Intermediate / Advanced** from the student's questions and recent history.
-  - Adjusts language depth automatically.
-- **Confusion detection**:
-  - Detects phrases like “I didn’t understand”, “explain again”, “still confused” (regex-based, typo-tolerant).
-  - Switches into “re-explain more simply” mode when confusion is detected.
-  - **Logs** inferred `level` and `confused` flag in the backend console for demo/showcase.
-- **Highlight context window**:
-  - Along with the exact selection, the frontend extracts **before + after** surrounding text and sends it as `highlight_context`.
-  - Helps reduce hallucination by giving the LLM nearby context.
-- **Acknowledgement handling**:
-  - If the student says “yes got it / ok / thanks” (no real question), backend replies with a short friendly confirmation instead of generating a long answer.
-- **Student-provided lessons**:
-  - Student can use the sample lesson OR **paste/upload** their own lesson (`.txt`) to read.
+### ✏️ Highlight-Based Assistance
+- Highlight any text in the lesson
+- Instant **“Ask EduAgent”** popover appears
+- Uses selected text + surrounding context for accurate answers
 
-## Structure
+### 💬 Context-Aware Chat
+- Maintains conversation history
+- Supports follow-up questions with continuity
 
-- `frontend/` – React + Vite app
-  - `src/App.jsx` – lesson selection (sample/custom) + opens EduAgent chat
-  - `src/components/LessonViewer.jsx` – lesson rendering + highlight detection + context window extraction
-  - `src/components/HighlightButton.jsx` – floating “Ask EduAgent” popover near selection
-  - `src/components/ChatBox.jsx` – chat UI + session history + sends `lesson_text`, `highlighted_text`, `highlight_context`, and recent messages
-  - `src/api.js` – backend API wrapper (`POST /api/chat`)
-- `backend/` – FastAPI
-  - `main.py` – API endpoints
-  - `models.py` – request/response schemas (includes `highlight_context`)
-  - `llm.py` – Groq call + prompting (grounding, structure, personalization, confusion detection, acknowledgement handling)
+### 🔄 Fallback Context Handling
+- If no highlight is selected:
+  - Uses the **entire lesson** as context
+- Prevents generic or irrelevant responses
 
-## Running locally
+---
 
-### 1) Backend (FastAPI)
+## 🧠 Advanced Capabilities
+
+### ⚡ Groq LLM Integration
+- Fast responses using Groq Chat Completions
+- API key managed via `.env`
+
+### 📊 Structured Responses
+Each answer follows a consistent format:
+- **Summary**
+- **Key Idea**
+- **Step-by-Step Explanation**
+- **One-Line Answer**
+
+### 🎯 Answer Grounding
+- Responses strictly based on:
+  - Highlighted text OR
+  - Lesson content
+- Clearly states when information is not available
+
+### 🎓 Adaptive Personalization
+- Automatically infers student level:
+  - Beginner / Intermediate / Advanced
+- Adjusts explanation depth dynamically
+
+### 😕 Confusion Detection
+- Detects phrases like:
+  - “I didn’t understand”
+  - “Explain again”
+  - “Still confused”
+- Triggers simpler re-explanations
+- Logs:
+  - `student_level`
+  - `confused_flag`
+
+### 🔍 Highlight Context Window
+- Sends:
+  - Selected text
+  - Surrounding context (before + after)
+- Improves accuracy and reduces hallucinations
+
+### 👍 Smart Acknowledgement Handling
+- Detects responses like:
+  - “Got it”, “Thanks”
+- Returns short confirmations instead of long answers
+
+### 📂 Custom Lesson Support
+- Use sample lessons OR
+- Paste your own content OR
+- Upload `.txt` files
+
+---
+
+## 🏗️ Project Structure
+
+### Frontend (React + Vite)
+
+frontend/
+├── src/
+│ ├── App.jsx
+│ ├── components/
+│ │ ├── LessonViewer.jsx
+│ │ ├── HighlightButton.jsx
+│ │ ├── ChatBox.jsx
+│ ├── api.js
+
+
+### Backend (FastAPI)
+
+backend/
+├── main.py
+├── models.py
+├── llm.py
+
+
+---
+
+## ⚙️ Local Setup
+
+### 1️⃣ Backend Setup (FastAPI)
 
 Create `backend/.env`:
-
-```env
-GROQ_API_KEY=your_key_here
-```
+``env
+GROQ_API_KEY=your_api_key_here
 
 Run:
 
-```bash
 cd backend
 pip install -r requirements.txt
 uvicorn main:app --reload
-```
 
-Backend runs at `http://127.0.0.1:8000`.
+Backend runs at:
 
-### 2) Frontend (React + Vite)
-
-```bash
+http://127.0.0.1:8000
+2️⃣ Frontend Setup (React + Vite)
 cd frontend
 npm install
 npm run dev
-```
 
-Frontend runs at `http://localhost:5173` and proxies `/api/*` to the backend.
+Frontend runs at:
+
+http://localhost:5173
+
+API requests are proxied to /api/*
+
+🌟 Key Highlights
+
+Real-time AI-powered learning assistant
+
+Context-grounded LLM responses (no hallucination drift)
+
+Adaptive explanation based on student level
+
+Clean full-stack architecture
+
+Easily extensible (Redis, RAG, user state tracking)
+
+🔮 Future Improvements
+
+Persistent chat using Redis
+
+RAG for full lesson/document retrieval
+
+Student learning state tracking
+
+Multi-modal inputs (voice, images)
+
+Analytics dashboard for learning insights
+
+🧩 Tech Stack
+
+Frontend: React, Vite
+
+Backend: FastAPI
+
+LLM: Groq API
+
+State Handling: Session-based chat history
+
+Environment Management: python-dotenv
+
+📌 Demo Idea
+
+Load a lesson
+
+Highlight a concept
+
+Click Ask EduAgent
+
+Ask follow-up questions
+
+Observe adaptive explanations and structured responses
+
+
+---
+
+If you want, next I can:
+- Make this **ATS-optimized resume bullet (very strong impact)**
+- Or create a **killer GitHub description + tags**
+- Or help you prepare **interviewer Q&A based on this project** 🚀
