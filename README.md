@@ -101,87 +101,76 @@ backend/
 
 
 ---
+## 🧩 Tech Stack
+
+| Component | Technology |
+| :--- | :--- |
+| **Frontend** | React, Vite |
+| **Backend** | FastAPI (Python) |
+| **LLM Engine** | Groq API |
+| **State Handling** | Session-based chat history |
+| **Environment** | `python-dotenv` |
+
+---
 
 ## ⚙️ Local Setup
 
 ### 1️⃣ Backend Setup (FastAPI)
 
-Create `backend/.env`:
-``env
-GROQ_API_KEY=your_api_key_here
+1.  **Navigate to the backend directory:**
+    ```bash
+    cd backend
+    ```
+2.  **Create a `.env` file:**
+    ```env
+    GROQ_API_KEY=your_api_key_here
+    ```
+3.  **Install dependencies and run:**
+    ```bash
+    pip install -r requirements.txt
+    uvicorn main:app --reload
+    ```
+    * **URL:** `http://127.0.0.1:8000`
 
-Run:
+### 2️⃣ Frontend Setup (React + Vite)
 
-cd backend
-pip install -r requirements.txt
-uvicorn main:app --reload
-
-Backend runs at:
-
-http://127.0.0.1:8000
-2️⃣ Frontend Setup (React + Vite)
-cd frontend
-npm install
-npm run dev
-
-Frontend runs at:
-
-http://localhost:5173
-
-API requests are proxied to /api/*
-
-🌟 Key Highlights
-
-Real-time AI-powered learning assistant
-
-Context-grounded LLM responses (no hallucination drift)
-
-Adaptive explanation based on student level
-
-Clean full-stack architecture
-
-Easily extensible (Redis, RAG, user state tracking)
-
-🔮 Future Improvements
-
-Persistent chat using Redis
-
-RAG for full lesson/document retrieval
-
-Student learning state tracking
-
-Multi-modal inputs (voice, images)
-
-Analytics dashboard for learning insights
-
-🧩 Tech Stack
-
-Frontend: React, Vite
-
-Backend: FastAPI
-
-LLM: Groq API
-
-State Handling: Session-based chat history
-
-Environment Management: python-dotenv
-
-📌 Demo Idea
-
-Load a lesson
-
-Highlight a concept
-
-Click Ask EduAgent
-
-Ask follow-up questions
-
-Observe adaptive explanations and structured responses
-
+1.  **Navigate to the frontend directory:**
+    ```bash
+    cd frontend
+    ```
+2.  **Install dependencies and start the dev server:**
+    ```bash
+    npm install
+    npm run dev
+    ```
+    * **URL:** `http://localhost:5173`
+    * *Note: API requests are automatically proxied to `/api/*`*
 
 ---
 
-If you want, next I can:
-- Make this **ATS-optimized resume bullet (very strong impact)**
-- Or create a **killer GitHub description + tags**
-- Or help you prepare **interviewer Q&A based on this project** 🚀
+## 📌 Demo Idea
+
+1.  **Load a Lesson:** Import your educational content into the viewer.
+2.  **Highlight & Inquire:** Select a specific concept or phrase.
+3.  **Engage:** Click **"Ask EduAgent"**.
+4.  **Observe:** Watch the agent provide adaptive explanations and structured responses based on your follow-up questions.
+
+---
+
+## 🔮 Future Improvements
+
+* [ ] **Persistent Memory:** Chat history storage using Redis.
+* [ ] **RAG Integration:** Full lesson/document retrieval for deeper context.
+* [ ] **Learning Analytics:** Tracking student progress and state over time.
+* [ ] **Multi-modal Support:** Support for voice and image inputs.
+* [ ] **Insights Dashboard:** Visualization of learning trends and pain points.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
