@@ -62,17 +62,9 @@ pip install -r requirements.txt
 uvicorn main:app --reload
 ```
 
-Backend runs at `http://127.0.0.1:8000`.
+### 2️⃣ Frontend Setup (React + Vite)
 
 ### 2) Frontend (React + Vite)
-
-Create `frontend/.env`:
-
-```env
-VITE_BACKEND_URL=http://127.0.0.1:8000
-```
-
-Run:
 
 ```bash
 cd frontend
@@ -80,6 +72,4 @@ npm install
 npm run dev
 ```
 
-Frontend runs at `http://localhost:5173`.
-
-> In production, update `frontend/.env` with your deployed backend URL and `backend/.env` with your deployed frontend URL.
+Frontend runs at `http://localhost:5173` and proxies `/api/*` to the backend.
