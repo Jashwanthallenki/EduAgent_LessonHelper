@@ -1,16 +1,25 @@
+import os
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from dotenv import load_dotenv
 
 from models import ChatRequest, ChatResponse
 from llm import answer_question
+
+load_dotenv()
+
+frontend_url = (os.getenv("FRONTEND_URL") or "").strip()
+allow_origins = [frontend_url] if frontend_url else ["*"]
+allow_credentials = bool(frontend_url)
 
 app = FastAPI(title="EduAgent Backend", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
+    allow_origins=allow_origins,
+    allow_credentials=allow_credentials,
     allow_methods=["*"],
     allow_headers=["*"],
 )

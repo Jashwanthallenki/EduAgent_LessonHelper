@@ -51,6 +51,7 @@ Create `backend/.env`:
 
 ```env
 GROQ_API_KEY=your_key_here
+FRONTEND_URL=http://localhost:5173
 ```
 
 Run:
@@ -65,10 +66,20 @@ Backend runs at `http://127.0.0.1:8000`.
 
 ### 2) Frontend (React + Vite)
 
+Create `frontend/.env`:
+
+```env
+VITE_BACKEND_URL=http://127.0.0.1:8000
+```
+
+Run:
+
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-Frontend runs at `http://localhost:5173` and proxies `/api/*` to the backend.
+Frontend runs at `http://localhost:5173`.
+
+> In production, update `frontend/.env` with your deployed backend URL and `backend/.env` with your deployed frontend URL.
