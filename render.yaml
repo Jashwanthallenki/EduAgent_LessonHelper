@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: eduagent-backend
+    env: python
+    pythonVersion: "3.11"
+    repoRoot: backend
+    buildCommand: pip install -U pip setuptools wheel && pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    plan: free
+
+  - type: static
+    name: eduagent-frontend
+    env: node
+    repoRoot: frontend
+    buildCommand: npm install && npm run build
+    publishPath: dist
+    plan: free

@@ -10,7 +10,7 @@ from llm import answer_question
 
 load_dotenv()
 
-frontend_url = (os.getenv("FRONTEND_URL") or "").strip()
+frontend_url = (os.getenv("FRONTEND_URL") or "").strip().rstrip("/")
 allow_origins = [frontend_url] if frontend_url else ["*"]
 allow_credentials = bool(frontend_url)
 
